@@ -1,6 +1,7 @@
 from xml.etree.ElementTree import ElementTree
 from xml.etree.ElementTree import Element
-import xml.etree.ElementTree as etree
+import xml.etree.ElementTree as ET
+import json
 
 class Event:
   
@@ -27,19 +28,4 @@ class Event:
  def setDescription(self, description):
      self.description = description
 
- def saveEvent2Xml(self, fileName):
-     root = Element ('Event')
-     tree = ElementTree(root)
-     tdate = Element('Date')
-     root.append(tdate)
-     tdate.text = self.date
-     ttitle = Element('Title')
-     root.append(ttitle)
-     ttitle.text = self.title
-     tdescription = Element('description')
-     root.append(tdescription)
-     tdescription.text = self.description
-     f = open(fileName, 'ab')
-     tree.write(f)
-     f.close()
 
