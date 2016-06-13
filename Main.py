@@ -1,16 +1,17 @@
-from DiaryActions.Insert import *
-from DiaryActions.View import *
+from Entities.File import File
+from Entities.Event import Event
+from AssistanceModules.EventsListsHandler import *
+from AssistanceModules.DateValidation import *
 from DiaryActions.Delete import *
+from DiaryActions.Insert import *
 from DiaryActions.Search import *
 from DiaryActions.Update import *
-from EventsListsHandler import EventsListHandler
-from DateValidation import DateValidation
-from Event import Event
-from File import File
+from DiaryActions.View import *
+
 from flask import Flask
 
 app = Flask(__name__)
-filepath='events.json'  #DB file path (local to app folder)
+filepath='Diary_DB.json'  #DB file path (local to app folder)
 f = File(filepath)
 
 #------------------------------------------------------------------
@@ -88,7 +89,7 @@ def searchByDate(min_date, max_date):
     DateValidation.validateDate(max_date)
     if DateValidation.validateDateRange(min_date, max_date):
         result_list = Search.searchEventByDates(min_date, max_date, filepath)
-        return EventsListHandler.eventsListToStr(EventsListHandler.eventsListToStr(result_list))
+        return EventsListHandler.eventsListToStr(result_list)
     else:
         return 'date range not valid!'
 
@@ -99,7 +100,7 @@ def searchByDate(min_date, max_date):
 @app.route("/search-by-content,<str>")
 def searchByContentStr(str):
     result_list = Search.searchEventByContent(str, filepath)
-    return EventsListHandler.eventsListToStr(EventsListHandler.eventsListToStr(result_list))
+    return EventsListHandler.eventsListToStr(result_list)
 
 #-------------------------------------------------------
 #localhost:5000/search-by-date-and-content,<min_date>,<max_date>,<str>

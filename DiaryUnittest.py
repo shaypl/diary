@@ -1,13 +1,9 @@
-from DiaryActions.Insert import *
-from DiaryActions.View import *
-from DiaryActions.Delete import *
-from DiaryActions.Search import *
-from DiaryActions.Update import *
-from EventsListsHandler import EventsListHandler
-from DateValidation import DateValidation
-from Event import Event
-from File import File
 import unittest
+
+from EventsListsHandler import EventsListHandler
+
+from AssistanceModules.DateValidation import DateValidation
+
 
 class TestDateValidation(unittest.TestCase):
 
